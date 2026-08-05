@@ -1,6 +1,7 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
 import { Search, Loader2, AlertCircle, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -22,9 +23,24 @@ const DOT: Record<Severity, string> = {
 }
 
 export function WaterCheck() {
-  const [zip, setZip] = useState('')
-  const [submitted, setSubmitted] = useState<string | null>(null)
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const urlZip = searchParams.get('zip') ?? ''
+
+  const [zip, setZip] = useState(urlZip)
+  const [submitted, setSubmitted] = useState<string | null>(
+    /^\d{5}$/.test(urlZip) ? urlZip : null,
+  )
   const resultsRef = useRef<HTMLDivElement>(null)
+
+  // Keep the search in sync when the ?zip= query param changes (deep links, back/forward).
+  useEffect(() => {
+    if (/^\d{5}$/.test(urlZip)) {
+      setZip(urlZip)
+      setSubmitted(urlZip)
+    }
+  }, [urlZip])
 
   const { data, error, isLoading } = useSWR(
     submitted ? `/api/water?zip=${submitted}` : null,
@@ -37,6 +53,8 @@ export function WaterCheck() {
     const clean = zip.trim()
     if (!/^\d{5}$/.test(clean)) return
     setSubmitted(clean)
+    // Reflect the search in the URL so results are shareable.
+    router.replace(`${pathname}?zip=${clean}`, { scroll: false })
     // Smooth-scroll to the results once the request kicks off.
     requestAnimationFrame(() => {
       setTimeout(() => {

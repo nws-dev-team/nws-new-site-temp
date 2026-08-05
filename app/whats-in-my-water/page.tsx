@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { SiteHeader } from '@/components/site-header'
 import { WaterCheck } from '@/components/water-check/water-check'
 
@@ -12,7 +13,9 @@ export default function WhatsInMyWaterPage() {
   return (
     <main className="min-h-screen bg-background">
       <SiteHeader forceSolid />
-      <WaterCheck />
+      <Suspense fallback={<div className="min-h-[70vh]" />}>
+        <WaterCheck />
+      </Suspense>
       <footer className="border-t border-border bg-secondary/50">
         <div className="mx-auto max-w-4xl px-6 py-10">
           <p className="text-xs leading-relaxed text-muted-foreground">
