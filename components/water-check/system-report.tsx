@@ -9,7 +9,10 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Severity, WaterSystemResult } from '@/lib/water-data'
+import { buildRiskProfile } from '@/lib/water-risk'
 import { ContaminantCard } from './contaminant-card'
+import { RiskMeter } from './risk-meter'
+import { RegionalContaminants } from './regional-contaminants'
 
 const OVERALL: Record<
   Severity,
@@ -58,9 +61,28 @@ export function SystemReport({
     (c) => c.severity !== 'clear',
   )
   const clearContaminants = system.contaminants.filter((c) => c.severity === 'clear')
+  const profile = buildRiskProfile(system, location.zip)
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
+      {/* 1. Urgency-forward report summary */}
+      <RiskMeter profile={profile} />
+
+      {/* 2. Contaminants commonly found in the area */}
+      <RegionalContaminants profile={profile} city={location.city} state={location.state} />
+
+      {/* 3. Official EPA record for the specific provider */}
+      <div className="border-t border-border pt-10">
+        <div className="text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">
+            Official EPA Record
+          </p>
+          <h2 className="mt-2 font-serif text-3xl font-extrabold text-foreground text-balance">
+            Your provider&apos;s compliance history
+          </h2>
+        </div>
+      </div>
+
       {/* Headline summary card */}
       <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
         <div className={cn('bg-gradient-to-br px-6 py-8 text-white sm:px-10', overall.ring)}>
