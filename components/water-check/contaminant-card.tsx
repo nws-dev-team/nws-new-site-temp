@@ -4,28 +4,31 @@ import type { ParsedContaminant, Severity } from '@/lib/water-data'
 
 const SEVERITY_STYLES: Record<
   Severity,
-  { wrap: string; badge: string; icon: typeof AlertTriangle; label: string; bar: string }
+  { wrap: string; badge: string; icon: typeof AlertTriangle; label: string; bar: string; status: string }
 > = {
   critical: {
-    wrap: 'border-critical/30 bg-critical-soft',
-    badge: 'bg-critical text-critical-foreground',
+    wrap: 'border-red-600/30 bg-red-50',
+    badge: 'bg-red-600 text-white',
     icon: AlertTriangle,
     label: 'Action recommended',
-    bar: 'bg-critical',
+    bar: 'bg-red-600',
+    status: 'text-red-600',
   },
   warning: {
-    wrap: 'border-warning/30 bg-warning-soft',
-    badge: 'bg-warning text-warning-foreground',
+    wrap: 'border-amber-500/30 bg-amber-50',
+    badge: 'bg-amber-500 text-white',
     icon: AlertCircle,
     label: 'Worth watching',
-    bar: 'bg-warning',
+    bar: 'bg-amber-500',
+    status: 'text-amber-600',
   },
   clear: {
-    wrap: 'border-success/25 bg-success-soft',
-    badge: 'bg-success text-success-foreground',
+    wrap: 'border-emerald-600/25 bg-emerald-50',
+    badge: 'bg-emerald-600 text-white',
     icon: CheckCircle2,
     label: 'Within limits',
-    bar: 'bg-success',
+    bar: 'bg-emerald-600',
+    status: 'text-emerald-600',
   },
 }
 
@@ -49,7 +52,7 @@ export function ContaminantCard({ c }: { c: ParsedContaminant }) {
       <div className={cn('absolute inset-y-0 left-0 w-1.5', s.bar)} aria-hidden="true" />
       <div className="flex items-start justify-between gap-3 pl-2">
         <div className="min-w-0">
-          <h4 className="font-serif text-lg font-bold leading-tight text-foreground text-pretty">
+          <h4 className="font-sans text-lg font-bold leading-tight text-foreground text-pretty">
             {c.name}
           </h4>
           <p className="mt-0.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -67,13 +70,7 @@ export function ContaminantCard({ c }: { c: ParsedContaminant }) {
         </span>
       </div>
 
-      <p className={cn('mt-3 pl-2 text-sm font-semibold', {
-        'text-critical': c.severity === 'critical',
-        'text-warning': c.severity === 'warning',
-        'text-success': c.severity === 'clear',
-      })}>
-        {STATUS_TEXT[c.status]}
-      </p>
+      <p className={cn('mt-3 pl-2 text-sm font-semibold', s.status)}>{STATUS_TEXT[c.status]}</p>
 
       <p className="mt-2 pl-2 text-sm leading-relaxed text-muted-foreground">{c.about}</p>
       <p className="mt-2 pl-2 text-sm leading-relaxed text-foreground/80">

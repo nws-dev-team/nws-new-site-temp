@@ -22,25 +22,25 @@ const OVERALL: Record<
     icon: ShieldAlert,
     headline: 'Your water needs attention',
     sub: 'One or more health-based contaminants currently exceed EPA limits in your area.',
-    ring: 'from-critical to-critical/70',
-    chip: 'bg-critical text-critical-foreground',
-    accent: 'text-critical',
+    ring: 'from-red-600 to-red-500',
+    chip: 'bg-red-600 text-white',
+    accent: 'text-red-600',
   },
   warning: {
     icon: ShieldQuestion,
     headline: 'Your water has some concerns',
     sub: 'Contaminants have exceeded EPA limits recently or monitoring issues were reported.',
-    ring: 'from-warning to-warning/70',
-    chip: 'bg-warning text-warning-foreground',
-    accent: 'text-warning',
+    ring: 'from-amber-500 to-amber-400',
+    chip: 'bg-amber-500 text-white',
+    accent: 'text-amber-600',
   },
   clear: {
     icon: ShieldCheck,
     headline: 'Your water meets EPA limits',
     sub: 'No active health-based violations were found — but treatment can still improve taste, odor, and hardness.',
-    ring: 'from-success to-success/70',
-    chip: 'bg-success text-success-foreground',
-    accent: 'text-success',
+    ring: 'from-emerald-600 to-emerald-500',
+    chip: 'bg-emerald-600 text-white',
+    accent: 'text-emerald-600',
   },
 }
 
@@ -77,7 +77,7 @@ export function SystemReport({
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">
             Official EPA Record
           </p>
-          <h2 className="mt-2 font-serif text-3xl font-extrabold text-foreground text-balance">
+          <h2 className="mt-2 font-sans text-3xl font-extrabold text-foreground text-balance">
             Your provider&apos;s compliance history
           </h2>
         </div>
@@ -95,7 +95,7 @@ export function SystemReport({
                 <p className="text-sm font-medium uppercase tracking-wide text-white/80">
                   What&apos;s in your water
                 </p>
-                <h2 className="font-serif text-2xl font-extrabold leading-tight text-balance sm:text-3xl">
+                <h2 className="font-sans text-2xl font-extrabold leading-tight text-balance sm:text-3xl">
                   {overall.headline}
                 </h2>
               </div>
@@ -128,7 +128,7 @@ export function SystemReport({
       {/* Flagged contaminants (the stuff that stands out) */}
       {healthContaminants.length > 0 && (
         <div>
-          <h3 className="font-serif text-xl font-bold text-foreground">
+          <h3 className="font-sans text-xl font-bold text-foreground">
             Contaminants flagged in your area
           </h3>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -145,7 +145,7 @@ export function SystemReport({
       {/* Monitored / within-limits */}
       {clearContaminants.length > 0 && (
         <div>
-          <h3 className="font-serif text-lg font-bold text-foreground">
+          <h3 className="font-sans text-lg font-bold text-foreground">
             Monitored and within limits
           </h3>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -157,7 +157,7 @@ export function SystemReport({
       )}
 
       {healthContaminants.length === 0 && clearContaminants.length === 0 && (
-        <div className="rounded-2xl border border-success/25 bg-success-soft p-6">
+        <div className="rounded-2xl border border-emerald-600/25 bg-emerald-50 p-6">
           <p className="text-sm leading-relaxed text-foreground">
             EPA records show <span className="font-semibold">no reported contaminant violations</span> for
             this system. That&apos;s good news — though public data can lag, and it doesn&apos;t
@@ -217,9 +217,9 @@ function TallyChip({
   tone: Severity
 }) {
   const tones: Record<Severity, string> = {
-    critical: 'bg-critical',
-    warning: 'bg-warning',
-    clear: 'bg-success',
+    critical: 'bg-red-600',
+    warning: 'bg-amber-500',
+    clear: 'bg-emerald-600',
   }
   return (
     <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-sm">

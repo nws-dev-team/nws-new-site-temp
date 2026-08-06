@@ -2,15 +2,15 @@ import { cn } from '@/lib/utils'
 import type { RiskProfile, RiskLevel } from '@/lib/water-risk'
 
 const LEVEL_TONE: Record<RiskLevel, string> = {
-  Low: 'text-success',
-  Moderate: 'text-warning',
-  High: 'text-critical',
+  Low: 'text-emerald-600',
+  Moderate: 'text-amber-600',
+  High: 'text-red-600',
 }
 
 function barTone(score: number): string {
-  if (score >= 66) return 'bg-critical'
-  if (score >= 40) return 'bg-warning'
-  return 'bg-success'
+  if (score >= 66) return 'bg-red-600'
+  if (score >= 40) return 'bg-amber-500'
+  return 'bg-emerald-600'
 }
 
 export function RiskMeter({ profile }: { profile: RiskProfile }) {
@@ -24,7 +24,7 @@ export function RiskMeter({ profile }: { profile: RiskProfile }) {
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">
           Report Summary
         </p>
-        <h2 className="mt-2 font-serif text-3xl font-extrabold text-foreground text-balance sm:text-4xl">
+        <h2 className="mt-2 font-sans text-3xl font-extrabold text-foreground text-balance sm:text-4xl">
           What your local water profile shows.
         </h2>
       </div>
@@ -37,7 +37,7 @@ export function RiskMeter({ profile }: { profile: RiskProfile }) {
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
                 Water Risk Meter
               </p>
-              <h3 className="mt-1 font-serif text-2xl font-extrabold text-foreground">
+              <h3 className="mt-1 font-sans text-2xl font-extrabold text-foreground">
                 Estimated treatment urgency
               </h3>
             </div>
@@ -56,7 +56,7 @@ export function RiskMeter({ profile }: { profile: RiskProfile }) {
                 style={{
                   width: `${markerPct}%`,
                   background:
-                    'linear-gradient(90deg, var(--success) 0%, var(--warning) 55%, var(--critical) 100%)',
+                    'linear-gradient(90deg, #059669 0%, #d97706 55%, #dc2626 100%)',
                 }}
               />
               <div
@@ -79,7 +79,7 @@ export function RiskMeter({ profile }: { profile: RiskProfile }) {
 
         {/* Risk breakdown */}
         <div className="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
-          <h3 className="font-serif text-2xl font-extrabold text-foreground">Risk Breakdown</h3>
+          <h3 className="font-sans text-2xl font-extrabold text-foreground">Risk Breakdown</h3>
           <div className="mt-6 space-y-5">
             {breakdown.map((bar) => (
               <div key={bar.label}>

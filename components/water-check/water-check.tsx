@@ -17,9 +17,9 @@ const fetcher = async (url: string) => {
 }
 
 const DOT: Record<Severity, string> = {
-  critical: 'bg-critical',
-  warning: 'bg-warning',
-  clear: 'bg-success',
+  critical: 'bg-red-600',
+  warning: 'bg-amber-500',
+  clear: 'bg-emerald-600',
 }
 
 export function WaterCheck() {
@@ -73,7 +73,7 @@ export function WaterCheck() {
           <span className="h-2 w-2 rounded-full bg-accent" />
           Powered by official EPA data
         </span>
-        <h1 className="mt-6 font-serif text-4xl font-extrabold leading-[1.05] text-foreground text-balance sm:text-6xl">
+        <h1 className="mt-6 font-sans text-4xl font-extrabold leading-[1.05] text-foreground text-balance sm:text-6xl">
           What&apos;s in your water?
         </h1>
         <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
@@ -123,20 +123,20 @@ export function WaterCheck() {
             {isLoading && <LoadingState zip={submitted} />}
 
             {error && (
-              <div className="mx-auto max-w-md rounded-2xl border border-critical/30 bg-critical-soft p-6 text-center">
-                <AlertCircle className="mx-auto h-8 w-8 text-critical" />
+              <div className="mx-auto max-w-md rounded-2xl border border-red-600/30 bg-red-50 p-6 text-center">
+                <AlertCircle className="mx-auto h-8 w-8 text-red-600" />
                 <p className="mt-3 font-semibold text-foreground">We hit a snag</p>
                 <p className="mt-1 text-sm text-muted-foreground">{error.message}</p>
               </div>
             )}
 
             {data && !isLoading && (
-              <div className="animate-[reveal-up_0.6s_ease-out]">
+              <div>
                 <div className="mb-8 border-b border-border pb-6">
                   <p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
                     Results for
                   </p>
-                  <h2 className="font-serif text-2xl font-bold text-foreground">
+                  <h2 className="font-sans text-2xl font-bold text-foreground">
                     {data.location.city}, {data.location.state} {data.location.zip}
                   </h2>
                   {data.totalSystems > 1 && (
@@ -163,20 +163,19 @@ export function WaterCheck() {
                 )}
 
                 {/* CTA */}
-                <div className="mt-12 overflow-hidden rounded-3xl bg-brand-gradient px-8 py-10 text-center text-primary-foreground">
-                  <h3 className="font-serif text-2xl font-extrabold text-balance">
+                <div className="mt-12 overflow-hidden rounded-3xl bg-gradient-to-br from-sky-500 via-blue-700 to-blue-900 px-8 py-10 text-center text-white">
+                  <h3 className="font-sans text-2xl font-extrabold text-balance">
                     Know exactly what&apos;s in your tap
                   </h3>
-                  <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-primary-foreground/85">
+                  <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-white/85">
                     EPA data reflects the whole system — not your home&apos;s pipes. Get a free,
                     no-obligation in-home water test and a plan to fix what we find.
                   </p>
                   <Button
-                    className="mt-6 rounded-full bg-white px-8 text-primary hover:bg-white/90"
-                    nativeButton={false}
-                    render={<a href="tel:18005550199" />}
+                    asChild
+                    className="mt-6 rounded-full bg-white px-8 text-blue-900 hover:bg-white/90"
                   >
-                    Schedule my free water test
+                    <a href="tel:18005550199">Schedule my free water test</a>
                   </Button>
                 </div>
               </div>
@@ -192,7 +191,7 @@ function LoadingState({ zip }: { zip: string }) {
   return (
     <div className="flex flex-col items-center py-16 text-center">
       <Loader2 className="h-10 w-10 animate-spin text-accent" />
-      <p className="mt-4 font-serif text-lg font-bold text-foreground">
+      <p className="mt-4 font-sans text-lg font-bold text-foreground">
         Checking EPA records for {zip}…
       </p>
       <p className="mt-1 text-sm text-muted-foreground">
@@ -205,7 +204,7 @@ function LoadingState({ zip }: { zip: string }) {
 function OtherSystems({ others }: { others: WaterReport['others'] }) {
   return (
     <div className="mt-12">
-      <h3 className="font-serif text-xl font-bold text-foreground">
+      <h3 className="font-sans text-xl font-bold text-foreground">
         Other water systems in your area
       </h3>
       <p className="mt-1 text-sm text-muted-foreground">
@@ -232,7 +231,7 @@ function OtherSystems({ others }: { others: WaterReport['others'] }) {
                   {o.summary.critical + o.summary.warning} flagged
                 </span>
               ) : (
-                <span className="font-semibold text-success">No violations</span>
+                <span className="font-semibold text-emerald-600">No violations</span>
               )}
             </div>
           </li>
