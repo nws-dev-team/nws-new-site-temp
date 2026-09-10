@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { ArrowRight, Check, ShieldCheck, Loader2 } from 'lucide-react'
+import { ArrowRight, ChevronDown, ShieldCheck, Loader2 } from 'lucide-react'
 
 const TIMEFRAMES = [
   { value: 'asap', label: 'As soon as possible' },
@@ -141,27 +141,32 @@ export function LeadForm() {
           </div>
         </Field>
 
-        <Field label="How soon are you hoping to get installed?">
-          <div className="grid gap-2">
-            {TIMEFRAMES.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => update('timeframe', option.value)}
-                aria-pressed={form.timeframe === option.value}
-                className={cn(
-                  'flex h-11 items-center justify-between rounded-lg border px-4 text-sm font-medium transition-colors',
-                  form.timeframe === option.value
-                    ? 'border-accent bg-accent/10 text-accent'
-                    : 'border-input bg-background text-muted-foreground hover:border-accent/50 hover:text-foreground',
-                )}
-              >
-                {option.label}
-                {form.timeframe === option.value && (
-                  <Check className="h-4 w-4" />
-                )}
-              </button>
-            ))}
+        <Field
+          label="How soon are you hoping to get installed?"
+          htmlFor="timeframe"
+        >
+          <div className="relative">
+            <select
+              id="timeframe"
+              required
+              value={form.timeframe}
+              onChange={(e) => update('timeframe', e.target.value)}
+              className={cn(
+                inputClass,
+                'cursor-pointer appearance-none pr-10',
+                form.timeframe === '' && 'text-muted-foreground/60',
+              )}
+            >
+              <option value="" disabled>
+                Select a timeframe
+              </option>
+              {TIMEFRAMES.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           </div>
         </Field>
       </div>
