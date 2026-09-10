@@ -48,8 +48,8 @@ export function LeadForm() {
       const name = form.firstName.trim()
       router.push(
         name
-          ? `/free-water-test/confirmed?name=${encodeURIComponent(name)}`
-          : '/free-water-test/confirmed',
+          ? `/free-quote/confirmed?name=${encodeURIComponent(name)}`
+          : '/free-quote/confirmed',
       )
     }, 700)
   }

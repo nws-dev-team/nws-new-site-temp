@@ -103,7 +103,7 @@ export default async function ConfirmedPage({
             1-800-555-1234
           </a>
           <Link
-            href="/free-water-test"
+              href="/free-quote"
             className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
           >
             Back to the offer page
