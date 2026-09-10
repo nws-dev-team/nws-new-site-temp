@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { Check, Phone, Clock, ClipboardCheck, PhoneCall } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Request Received | National Water Systems',
+  title: 'Quote Request Received | National Water Systems',
   description:
-    'Thanks for requesting your free in-home water test. A certified specialist will reach out shortly to schedule your appointment.',
+    'Thanks for requesting your whole-home water filtration quote. A certified specialist will reach out shortly with your $2,990 offer details.',
   robots: { index: false, follow: false },
 }
 
@@ -13,17 +13,17 @@ const STEPS = [
   {
     icon: PhoneCall,
     title: 'We give you a call',
-    body: 'A local water specialist will reach out shortly to find a time that works for you.',
+    body: 'A local water specialist will reach out shortly to confirm your details and answer any questions.',
   },
   {
     icon: ClipboardCheck,
-    title: 'We test your water on-site',
-    body: 'The visit takes about 30 minutes. You get clear, honest results — no scare tactics.',
+    title: 'We confirm your quote',
+    body: 'We walk you through exactly what is included in your $2,990 whole-home filtration system — no hidden fees.',
   },
   {
     icon: Clock,
-    title: 'You decide, no pressure',
-    body: 'If a system makes sense for your home, we will walk you through the options. If not, no worries.',
+    title: 'We schedule your install',
+    body: 'Pick a time that works for you and our licensed team handles the rest. No pressure, no obligation.',
   },
 ]
 
@@ -65,8 +65,8 @@ export default async function ConfirmedPage({
         </h1>
 
         <p className="mx-auto mt-4 max-w-md text-pretty leading-relaxed text-muted-foreground">
-          Your free in-home water test request has been received. Here&apos;s
-          what happens next.
+          Your quote request for whole-home filtration at $2,990 has been
+          received. Here&apos;s what happens next.
         </p>
 
         <ol className="mt-12 grid w-full gap-4 text-left sm:grid-cols-3">
@@ -106,7 +106,7 @@ export default async function ConfirmedPage({
             href="/free-water-test"
             className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
           >
-            Back to the water test page
+            Back to the offer page
           </Link>
         </div>
       </div>

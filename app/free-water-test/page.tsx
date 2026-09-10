@@ -3,16 +3,16 @@ import { LeadForm } from '@/components/lead-form'
 import { Droplets, ShieldCheck, Star, CheckCircle2, Phone } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Free In-Home Water Test | National Water Systems',
+  title: 'Whole-Home Water Filtration for $2,990 | National Water Systems',
   description:
-    'Find out what is really in your water. Book a free, no-obligation in-home water test and get a personalized recommendation from a certified specialist.',
+    'Get whole-home water filtration installed for $2,990 — hard water, chlorine, and contaminants gone. Request your free quote from a certified specialist today.',
 }
 
 const BENEFITS = [
-  'Certified specialist tests your water on-site',
-  'Clear, honest results — no scare tactics',
-  'A recommendation only if you actually need one',
-  'NSF-certified systems with a 10-year warranty',
+  'Whole-home filtration — every tap, every faucet',
+  'Removes hard water, chlorine & common contaminants',
+  'Professional installation by licensed technicians',
+  'NSF-certified system with a 10-year warranty',
 ]
 
 export default function FreeWaterTestPage() {
@@ -41,18 +41,18 @@ export default function FreeWaterTestPage() {
         <div className="flex flex-col justify-center">
           <span className="inline-flex w-fit items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.16em] text-accent">
             <Droplets className="h-3.5 w-3.5" />
-            Free in-home water test
+            Limited-time offer
           </span>
 
           <h1 className="mt-6 text-balance font-serif text-4xl font-light leading-[1.08] tracking-tight text-foreground sm:text-5xl">
-            Find out what&apos;s really in your{' '}
-            <span className="text-brand-gradient italic">home&apos;s water.</span>
+            Whole-home water filtration for{' '}
+            <span className="text-brand-gradient italic">$2,990.</span>
           </h1>
 
           <p className="mt-5 max-w-md text-pretty leading-relaxed text-muted-foreground">
-            Hard water, chlorine, and hidden contaminants could be affecting your
-            home every day. Book a free test and see the results for yourself —
-            with zero obligation.
+            Clean, filtered water at every tap — hard water, chlorine, and hidden
+            contaminants gone for good. Fully installed by our licensed team.
+            Request your quote to lock in this price.
           </p>
 
           <ul className="mt-8 grid gap-3">

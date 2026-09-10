@@ -61,7 +61,7 @@ export function LeadForm() {
     >
       <div className="mb-6">
         <h2 className="font-serif text-2xl font-light leading-tight text-foreground">
-          Claim your free water test
+          Get your $2,990 quote
         </h2>
         <p className="mt-1.5 text-sm text-muted-foreground">
           Takes under a minute. No obligation, no pressure.
@@ -176,7 +176,7 @@ export function LeadForm() {
           <Loader2 className="h-4 w-4 animate-spin" />
         ) : (
           <>
-            Get my free water test
+            Get my quote
             <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </>
         )}
