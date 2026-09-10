@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ArrowRight, Check, ShieldCheck, Loader2 } from 'lucide-react'
@@ -31,34 +32,26 @@ const EMPTY: FormState = {
 }
 
 export function LeadForm() {
+  const router = useRouter()
   const [form, setForm] = useState<FormState>(EMPTY)
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'done'>('idle')
+  const [status, setStatus] = useState<'idle' | 'submitting'>('idle')
 
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((prev) => ({ ...prev, [key]: value }))
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // No backend wired up yet — this is a design pass.
+    // No backend wired up yet — this is a design pass. On submit we send the
+    // lead to the confirmation page, which is where the Meta pixel will live.
     setStatus('submitting')
-    setTimeout(() => setStatus('done'), 700)
-  }
-
-  if (status === 'done') {
-    return (
-      <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-xl shadow-primary/5 sm:p-10">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent/10">
-          <Check className="h-7 w-7 text-accent" />
-        </div>
-        <h2 className="mt-6 font-serif text-2xl font-light text-foreground">
-          You&apos;re all set, {form.firstName || 'friend'}.
-        </h2>
-        <p className="mx-auto mt-3 max-w-sm text-pretty leading-relaxed text-muted-foreground">
-          A water specialist will reach out shortly to schedule your free,
-          no-obligation water test.
-        </p>
-      </div>
-    )
+    setTimeout(() => {
+      const name = form.firstName.trim()
+      router.push(
+        name
+          ? `/free-water-test/confirmed?name=${encodeURIComponent(name)}`
+          : '/free-water-test/confirmed',
+      )
+    }, 700)
   }
 
   return (
