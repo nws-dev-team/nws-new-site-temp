@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { LeadForm } from '@/components/lead-form'
-import { Droplets, ShieldCheck, Star, CheckCircle2, Phone } from 'lucide-react'
+import { Droplets, ShieldCheck, Star, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Whole-Home Water Filtration for $2,990 | National Water Systems',
@@ -20,19 +20,12 @@ export default function FreeWaterTestPage() {
     <main className="min-h-screen bg-background">
       {/* Minimal header — no nav distractions on an ad landing page */}
       <header className="border-b border-border">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <div className="mx-auto flex h-16 max-w-6xl items-center px-6">
           <img
             src="/images/nws-logo.png"
             alt="National Water Systems"
             className="h-8 w-auto sm:h-9"
           />
-          <a
-            href="tel:18005551234"
-            className="flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-accent"
-          >
-            <Phone className="h-4 w-4" />
-            <span className="hidden sm:inline">1-800-555-1234</span>
-          </a>
         </div>
       </header>
 
